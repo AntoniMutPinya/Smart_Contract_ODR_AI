@@ -1,0 +1,56 @@
+contract ReglamentoEuropeoRetrasos{ 
+
+    address Empresa = 0x5B38Da6a701c568545dCfcB03FcB875f56beddC4;  
+
+        struct Costumer { 
+            string ID; 
+            string FirstName; 
+            string LastName; 
+            uint TimeArrival; 
+            uint ActualTimeArrival; 
+            bool Right; 
+            uint Distance; 
+            uint Compensation_amount; 
+        } 
+
+    mapping (address => Costumer) Costumers; 
+    address[ ] public CostumersAccts; 
+
+
+ function A_setCostumer(address _address, string _ID, string _FirstName, string _LastName,  
+    uint _TimeArrival, uint _Distance) public { 
+        var costumer = Costumers[_address]; 
+        costumer.ID = _ID; 
+        costumer.FirstName = _FirstName; 
+        costumer.LastName = _LastName; 
+        costumer.TimeArrival = _TimeArrival; 
+        costumer.Distance = _Distance; 
+        CostumersAccts.push(_address) -1; 
+    }
+
+function B_setActualTimeArrival(address _address, uint _ActualTimerArrival) public { 
+        var costumer = Costumers[_address]; 
+        costumer.ActualTimeArrival = _ActualTimerArrival; 
+    }  
+
+   function C_Right(address _address) public { 
+        var costumer = Costumers[_address]; 
+        bool result;  
+        var dealy= (Costumers[_address].ActualTimeArrival - Costumers[_address].TimeArrival);  
+        if (delay >= 300) {result = true;} else {result = false;} 
+        costumer.Right = result; 
+    }  
+
+     
+    function D_Compensation(address _address) public { 
+        var costumer = Costumers[_address]; 
+        uint result;  
+        uint a = 250; 
+        uint b = 400; 
+        uint c = 600; 
+        uint KM = Costumers[_address].Distance; 
+        if (KM < 1500) {result = a;} else if (KM <= 3500) {result = b;} else {result = c;} 
+        costumer.Compensation_amount = result; 
+    }  
+
+     
